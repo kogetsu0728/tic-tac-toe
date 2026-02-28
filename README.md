@@ -14,7 +14,13 @@ python3 -m http.server 8000
 
 ## 構成
 
-- `assets/js/game/*`: ルール・状態・進行管理
+- `assets/js/game/rules.js`: 勝敗/合法手/終局判定
+- `assets/js/game/state.js`: イミュータブルな状態更新
+- `assets/js/game/engine.js`: ゲーム進行制御（人間手/AI手）
+- `assets/js/game/players.js`: プレイヤー記号ユーティリティ
 - `assets/js/ai/*`: Minimax と最適手API
-- `assets/js/ui/*`: DOM取得・描画・イベント
+- `assets/js/ui/dom.js`: DOM参照の集約
+- `assets/js/ui/events.js`: UIイベント購読
+- `assets/js/ui/view-model.js`: state -> 表示モデル変換
+- `assets/js/ui/render.js`: 表示モデルの描画
 - `assets/js/main.js`: 全体配線

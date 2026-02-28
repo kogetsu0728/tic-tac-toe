@@ -7,9 +7,15 @@ function qs(selector) {
 }
 
 export function getCells() {
-  const cells = Array.from(document.querySelectorAll(".cell[data-idx]"));
+  const cells = Array.from(els.board.querySelectorAll(".cell[data-idx]"));
   assert(cells.length === 9, `セル数が不正です。期待値:9, 実際:${cells.length}`);
-  return cells;
+
+  const sorted = cells.slice().sort((a, b) => Number(a.dataset.idx) - Number(b.dataset.idx));
+  sorted.forEach((cell, expectedIdx) => {
+    assert(Number(cell.dataset.idx) === expectedIdx, `data-idxが連番ではありません: ${cell.dataset.idx}`);
+  });
+
+  return sorted;
 }
 
 export const els = {

@@ -1,16 +1,24 @@
 import { els, getCells } from "./dom.js";
 
 export function bindUIEvents({ onCellClick, onReset, onHumanChange }) {
-  const cells = getCells();
+  getCells();
 
-  const cellListeners = cells.map((cell) => {
-    const listener = () => {
-      const idx = Number(cell.dataset.idx);
+  const boardClickListener = (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) {
+      return;
+    }
+    const cell = target.closest(".cell[data-idx]");
+    if (cell === null || !els.board.contains(cell)) {
+      return;
+    }
+
+    const idx = Number(cell.dataset.idx);
+    if (Number.isInteger(idx)) {
       onCellClick?.(idx);
-    };
-    cell.addEventListener("click", listener);
-    return { cell, listener };
-  });
+    }
+  };
+  els.board.addEventListener("click", boardClickListener);
 
   const resetListener = () => onReset?.();
   els.resetBtn.addEventListener("click", resetListener);
@@ -22,9 +30,7 @@ export function bindUIEvents({ onCellClick, onReset, onHumanChange }) {
   els.humanPlayer.addEventListener("change", humanChangeListener);
 
   return function unbindUIEvents() {
-    for (const { cell, listener } of cellListeners) {
-      cell.removeEventListener("click", listener);
-    }
+    els.board.removeEventListener("click", boardClickListener);
     els.resetBtn.removeEventListener("click", resetListener);
     els.humanPlayer.removeEventListener("change", humanChangeListener);
   };

@@ -1,9 +1,10 @@
 import { createInitialState, applyMove } from "./state.js";
 import { getBestMove } from "../ai/perfect.js";
 import { isLegalMove } from "./rules.js";
+import { PLAYER_X } from "./players.js";
 
 export class GameEngine {
-  constructor({ human = "X", selectBestMove = getBestMove } = {}) {
+  constructor({ human = PLAYER_X, selectBestMove = getBestMove } = {}) {
     this.selectBestMove = selectBestMove;
     this.state = createInitialState({ human });
   }

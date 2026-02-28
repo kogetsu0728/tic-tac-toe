@@ -1,41 +1,35 @@
-import { getLegalMoves, getWinner, isDraw } from "../game/rules.js";
-
-function oppositePlayer(player) {
-  return player === "X" ? "O" : "X";
-}
-
-function evaluateTerminal(board, maximizingPlayer, depth) {
-  const { winner } = getWinner(board);
-  if (winner === maximizingPlayer) {
-    return 10 - depth;
-  }
-  if (winner === oppositePlayer(maximizingPlayer)) {
-    return depth - 10;
-  }
-  if (isDraw(board)) {
-    return 0;
-  }
-  return null;
-}
+import { getLegalMoves, getWinner } from "../game/rules.js";
+import { oppositePlayer } from "../game/players.js";
 
 export function minimax(board, currentPlayer, maximizingPlayer, alpha = -Infinity, beta = Infinity, depth = 0) {
-  const terminalScore = evaluateTerminal(board, maximizingPlayer, depth);
-  if (terminalScore !== null) {
-    return { move: null, score: terminalScore };
+  const { winner } = getWinner(board);
+  if (winner === maximizingPlayer) {
+    return { move: null, score: 10 - depth };
+  }
+  if (winner === oppositePlayer(maximizingPlayer)) {
+    return { move: null, score: depth - 10 };
   }
 
   const legalMoves = getLegalMoves(board);
+  if (legalMoves.length === 0) {
+    return { move: null, score: 0 };
+  }
+
   const isMaximizingTurn = currentPlayer === maximizingPlayer;
 
   if (isMaximizingTurn) {
-    let best = { move: legalMoves[0], score: -Infinity };
+    let bestMove = null;
+    let bestScore = -Infinity;
+
     for (const move of legalMoves) {
       const nextBoard = board.slice();
       nextBoard[move] = currentPlayer;
 
       const result = minimax(nextBoard, oppositePlayer(currentPlayer), maximizingPlayer, alpha, beta, depth + 1);
-      if (result.score > best.score || (result.score === best.score && move < best.move)) {
-        best = { move, score: result.score };
+      const isTieBreakBetter = bestMove === null || move < bestMove;
+      if (result.score > bestScore || (result.score === bestScore && isTieBreakBetter)) {
+        bestMove = move;
+        bestScore = result.score;
       }
 
       alpha = Math.max(alpha, result.score);
@@ -43,17 +37,21 @@ export function minimax(board, currentPlayer, maximizingPlayer, alpha = -Infinit
         break;
       }
     }
-    return best;
+
+    return { move: bestMove, score: bestScore };
   }
 
-  let best = { move: legalMoves[0], score: Infinity };
+  let bestMove = null;
+  let bestScore = Infinity;
   for (const move of legalMoves) {
     const nextBoard = board.slice();
     nextBoard[move] = currentPlayer;
 
     const result = minimax(nextBoard, oppositePlayer(currentPlayer), maximizingPlayer, alpha, beta, depth + 1);
-    if (result.score < best.score || (result.score === best.score && move < best.move)) {
-      best = { move, score: result.score };
+    const isTieBreakBetter = bestMove === null || move < bestMove;
+    if (result.score < bestScore || (result.score === bestScore && isTieBreakBetter)) {
+      bestMove = move;
+      bestScore = result.score;
     }
 
     beta = Math.min(beta, result.score);
@@ -62,5 +60,5 @@ export function minimax(board, currentPlayer, maximizingPlayer, alpha = -Infinit
     }
   }
 
-  return best;
+  return { move: bestMove, score: bestScore };
 }
