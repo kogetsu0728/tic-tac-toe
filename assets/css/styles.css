@@ -36,20 +36,8 @@ body {
   box-shadow: 0 16px 36px #02061780;
 }
 
-.app-header h1 {
-  margin: 0;
-  font-size: 1.9rem;
-  letter-spacing: 0.02em;
-}
-
-.subtitle {
-  margin: 6px 0 0;
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-
 .controls {
-  margin-top: 16px;
+  margin-top: 0;
   display: grid;
   grid-template-columns: 1fr 1fr auto;
   gap: 8px;
