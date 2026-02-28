@@ -39,14 +39,9 @@ body {
 .controls {
   margin-top: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr auto;
+  grid-template-columns: 1fr auto;
   gap: 8px;
   align-items: center;
-}
-
-.controls label {
-  color: var(--muted);
-  font-size: 0.9rem;
 }
 
 .controls select,
