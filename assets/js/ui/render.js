@@ -5,11 +5,9 @@ const cells = getCells();
 
 export function render(state, viewModel = {}) {
   assert(state !== null && typeof state === "object", "renderにはstateオブジェクトが必要です");
-  assert(typeof viewModel.statusText === "string", "viewModel.statusTextが必要です");
   assert(typeof viewModel.human === "string", "viewModel.humanが必要です");
   assert(Array.isArray(viewModel.cells) && viewModel.cells.length === cells.length, "viewModel.cellsが不正です");
 
-  els.statusText.textContent = viewModel.statusText;
   els.humanPlayer.value = viewModel.human;
 
   for (const cell of cells) {

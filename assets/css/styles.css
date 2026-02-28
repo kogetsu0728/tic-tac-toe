@@ -72,16 +72,6 @@ body {
   outline-offset: 2px;
 }
 
-.status {
-  margin-top: 14px;
-  min-height: 1.4em;
-  font-weight: 700;
-}
-
-.status p {
-  margin: 0;
-}
-
 .board-wrap {
   margin-top: 16px;
 }

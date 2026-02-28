@@ -20,7 +20,6 @@ export function getCells() {
 
 export const els = {
   board: qs("#board"),
-  statusText: qs("#status-text"),
   resetBtn: qs("#reset-btn"),
   humanPlayer: qs("#human-player"),
 };
