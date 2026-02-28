@@ -24,6 +24,8 @@ export function render(state, viewModel = {}) {
     const idx = Number(cell.dataset.idx);
     const marker = state.board[idx];
     cell.textContent = marker ?? "";
+    cell.classList.toggle("is-x", marker === "X");
+    cell.classList.toggle("is-o", marker === "O");
 
     const isPlayable = !locked && !state.isGameOver && state.turn === state.human && marker === null;
     cell.disabled = !isPlayable;

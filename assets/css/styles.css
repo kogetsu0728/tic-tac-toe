@@ -7,6 +7,8 @@
   --accent-strong: #0284c7;
   --line: #334155;
   --winning: #f59e0b;
+  --x-color: #ef4444;
+  --o-color: #3b82f6;
 }
 
 * {
@@ -128,6 +130,14 @@ body {
 .cell[disabled] {
   cursor: not-allowed;
   opacity: 0.65;
+}
+
+.cell.is-x {
+  color: var(--x-color);
+}
+
+.cell.is-o {
+  color: var(--o-color);
 }
 
 .cell.is-winning {
