@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic-Tac-Toe vs Perfect AI</title>
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="app-header">
+        <h1>Tic-Tac-Toe</h1>
+        <p class="subtitle">人間 vs 最適AI（Minimax）</p>
+      </header>
+
+      <section class="controls" aria-label="ゲーム設定">
+        <label for="human-player">プレイヤー</label>
+        <select id="human-player" name="human-player">
+          <option value="X">先手（X）</option>
+          <option value="O">後手（O）</option>
+        </select>
+        <button id="reset-btn" type="button">リセット</button>
+      </section>
+
+      <section class="status" aria-live="polite" aria-atomic="true">
+        <p id="status-text">読み込み中...</p>
+      </section>
+
+      <section class="board-wrap" aria-label="三目並べ盤面">
+        <div id="board" class="board" role="grid">
+          <button class="cell" type="button" data-idx="0" aria-label="左上"></button>
+          <button class="cell" type="button" data-idx="1" aria-label="上中央"></button>
+          <button class="cell" type="button" data-idx="2" aria-label="右上"></button>
+          <button class="cell" type="button" data-idx="3" aria-label="左中央"></button>
+          <button class="cell" type="button" data-idx="4" aria-label="中央"></button>
+          <button class="cell" type="button" data-idx="5" aria-label="右中央"></button>
+          <button class="cell" type="button" data-idx="6" aria-label="左下"></button>
+          <button class="cell" type="button" data-idx="7" aria-label="下中央"></button>
+          <button class="cell" type="button" data-idx="8" aria-label="右下"></button>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="./assets/js/main.js"></script>
+  </body>
+</html>
